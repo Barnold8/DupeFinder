@@ -6,6 +6,11 @@
 
 int main(int argc, char *argv[]){
 
+    FILE *fptr;
+
+    
+    fptr = fopen("test/video1.mp4", "r");
+
 
 
 
