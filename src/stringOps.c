@@ -17,8 +17,6 @@ char* removeCharByIndex(const char* string, int index){
         if(i != index){
             
             stringBuffer[bufferIndex] = string[i];
-
-            printf("stringBuffer[bufferIndex] = %c |string[i] = %c\n",stringBuffer[bufferIndex],string[i]);
             bufferIndex++;
         }
 
@@ -26,4 +24,12 @@ char* removeCharByIndex(const char* string, int index){
     stringBuffer[bufferIndex++] = '\0';
 
     return stringBuffer;
+}
+
+
+int stringIsNum(const char* string){
+
+
+
+    return -1;
 }
