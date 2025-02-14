@@ -1,13 +1,13 @@
 #ifndef ARGS
 #define ARGS
 
-struct argsResult{
+typedef struct argsResult{
 
     int bufSize;
     char* folderPath;
 
-};
+}argsResult;
 
-void handleArgs(int argc, char *argv[]);
+argsResult handleArgs(int argc, char *argv[]);
 
 #endif

@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* removeCharByIndex(const char* string, int index){
+char* removeCharByIndex(const char* string, int index){ // i didnt even need this function im silly
 
     int len = strlen(string);
     int bufferIndex = 0;
     if (index < 0 || index >= len) return NULL;
 
-    char* stringBuffer= malloc(len*sizeof(char));
+    char* stringBuffer = malloc(len*sizeof(char));
     if(!stringBuffer){return NULL;}
 
     for(int i = 0; i < len; i++){

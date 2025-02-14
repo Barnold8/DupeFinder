@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
 
     FILE *fptr;
 
-    handleArgs(argc,argv);
+    argsResult a = handleArgs(argc,argv);
 
     char buf[1028];
 
