@@ -29,7 +29,15 @@ char* removeCharByIndex(const char* string, int index){
 
 int stringIsNum(const char* string){
 
+    int len = strlen(string);
+    
+    for(int i = 0; i < len; i++){
 
+        if(string[i] > 57 || string[i] < 48){
+            return -1;
+        }
 
-    return -1;
+    }
+
+    return 1;
 }

@@ -23,10 +23,12 @@ void handleArgs(int argc, char *argv[]){
 
                 case 's':
                    
-                    char* numberString = removeCharByIndex("Hello world",0);
-
-                    printf("Number string %s\n",numberString);
+                    char* numberString = removeCharByIndex("187653",0);
+                    
+                    printf("Number string %s | IsNumber %d \n",numberString,stringIsNum(numberString));
+                    
                     // long num1 = strtol(str1, &endptr, 10);
+
                     free(numberString);
 
                     break;
