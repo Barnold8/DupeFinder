@@ -8,6 +8,9 @@ void flushInputBuffer(){
     while(getchar() != '\n');
 }
 
+//TODO: Error checking when a flag is called but no data is present. Example
+//
+//main.exe -s 1064 -d
 
 argsResult handleArgs(int argc, char *argv[]){
 
