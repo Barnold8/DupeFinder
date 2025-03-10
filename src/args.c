@@ -76,8 +76,7 @@ argsResult handleArgs(int argc, char *argv[]){
 }
 
 int validArgs(argsResult * args){
-    // int bufSize;
-    // char* folderPath;
+
     if(args->bufSize <=0){
         printf("Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
         return -1;
@@ -86,8 +85,5 @@ int validArgs(argsResult * args){
         printf("Error: The length of the path provided was %d which is invalid.\n",strlen(args->folderPath));    
         return -1;
     }
-      // int bufSize;
-    // char* folderPath;))
-    // if(args->folderPath )
-
+    
 }

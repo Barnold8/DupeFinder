@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
          return 0;     
     }   
 
-    // fileHash(fptr);
+    fileHash(fptr);
 
     return 0;
 }
