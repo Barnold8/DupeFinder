@@ -12,6 +12,7 @@ int validPath(char* path){
 
     if (string == NULL){
         free(string);
+        string = NULL;
         return 0;
     }
 
@@ -39,6 +40,11 @@ int validPath(char* path){
 
     #endif
 
+    if(string != NULL){
+        free(string);
+        string = NULL;
+    }
+ 
 
     return 0;
 }
