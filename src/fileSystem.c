@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include "fileSystem.h"
 
 
@@ -61,6 +62,7 @@ int validPath(char* path){
             free(string);
             string = NULL;
         }
+
         return 0;
     #endif
 
@@ -74,19 +76,18 @@ int validPath(char* path){
 
 void getFiles(char* path){
     
+    hashedFile* files;
 
-    #ifdef _WIN32 
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(".");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+        printf("%s\n", dir->d_name);
+        }
+        closedir(d);
+    }
+    
 
-        printf("Win32");
-
-    #elif __linux__
-
-        printf("Linux");
-
-    #else
-
-        printf("Warning! You are attempting to run this code ona system that does not support it. This program is intended for Windows and Linux systems\n");
-        // return something to signify that an error has ocurred 
-    #endif
 
 }

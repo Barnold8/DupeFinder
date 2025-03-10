@@ -16,8 +16,13 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    if(validPath(arguments.folderPath)) printf("%s is a valid path!\n",arguments.folderPath);
-    else  printf("%s is a not valid path!\n",arguments.folderPath);
+    if(validPath(arguments.folderPath)){
+        getFiles(arguments.folderPath);
+    }
+    else {
+        printf("%s is a not valid path!\n",arguments.folderPath);
+        return 1;
+    }
 
     return 0;
 }
