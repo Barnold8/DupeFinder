@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    validPath(arguments.folderPath);
+    if(validPath(arguments.folderPath)) printf("%s is a valid path!\n",arguments.folderPath);
 
     return 0;
 }
