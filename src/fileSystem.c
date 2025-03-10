@@ -28,7 +28,7 @@ int validPath(char* path){
         int returnValue = system(string);
         system("cls"); // just to clean up really
 
-        return (returnValue == 1) ? 0 : 1; // stupid
+        return (returnValue != 0) ? 0 : 1; // stupid
 
     #elif __linux__ 
 
@@ -42,7 +42,7 @@ int validPath(char* path){
         int returnValue = system(string);
         system("clear"); // just to clean up really
 
-        return (returnValue == 1) ? 0 : 1; // stupid
+        return (returnValue != 0) ? 0 : 1; // stupid
     
     #else
 
