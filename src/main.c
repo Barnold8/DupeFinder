@@ -18,7 +18,8 @@ int main(int argc, char *argv[]){
 
     setbuf(stdin, buf);
 
-    fptr = fopen("test/video1.mp4", "rb");
+    // fptr = fopen("test/video1.mp4", "rb");
+    fptr = fopen("test/test.txt", "rb");
 
     if (fptr == NULL)
     {
