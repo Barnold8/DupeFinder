@@ -33,11 +33,16 @@ int validPath(char* path){
     #elif __linux__ 
 
         char* ls = "ls ";
+        int lsLen = strlen(ls);
+        
+        //+1 for \0
+        memcpy(string, ls, lsLen); 
+        memcpy(string + lsLen,path,pathLen+1);
 
+        int returnValue = system(string);
+        system("clear"); // just to clean up really
 
-
-        // system("ls " + path);
-
+        return (returnValue == 1) ? 0 : 1; // stupid
     #endif
 
     if(string != NULL){
