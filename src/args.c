@@ -4,6 +4,11 @@
 #include "args.h"
 #include "stringOps.h"
 
+void flushInputBuffer(){
+    while(getchar() != '\n');
+}
+
+
 argsResult handleArgs(int argc, char *argv[]){
 
     char* usageString = "USAGE dff.exe [-d C:/users/user/desktop] [-s 1064]";
@@ -84,9 +89,23 @@ argsResult handleArgs(int argc, char *argv[]){
 int validArgs(argsResult * args){
 
     int len = strlen(args->folderPath);
-    if(args->bufSize <=0){
+    char decision;
+
+
+    if(args->bufSize <= 0){
         printf("Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
         return 0;
+    }
+
+    if(args->bufSize >= 1073741824){
+
+        printf("WARNING! You have selected a big amount of memory to be used for the file buffer stream (over 1GB), if you don't want to use this amount of memory, please restart the program, else type Y\nDecision: ");
+        
+        scanf("%c", &decision);
+        flushInputBuffer();
+
+        if(!(decision == 89 || decision == 121 )) return 0; // it still passed?
+
     }
 
     if (args->folderPath == NULL || strlen(args->folderPath) <= 0) {
