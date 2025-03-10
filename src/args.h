@@ -10,4 +10,6 @@ typedef struct argsResult{
 
 argsResult handleArgs(int argc, char *argv[]);
 
+int validArgs(argsResult * args);
+
 #endif

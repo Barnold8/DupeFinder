@@ -10,6 +10,10 @@ int main(int argc, char *argv[]){
 
     argsResult a = handleArgs(argc,argv);
 
+    if(!(validArgs(&a))){
+        return -1;
+    }
+
     char buf[1028];
 
     setbuf(stdin, buf);

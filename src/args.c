@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "args.h"
 #include "stringOps.h"
 
@@ -74,3 +75,19 @@ argsResult handleArgs(int argc, char *argv[]){
     return args;
 }
 
+int validArgs(argsResult * args){
+    // int bufSize;
+    // char* folderPath;
+    if(args->bufSize <=0){
+        printf("Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
+        return -1;
+    }
+    if(strlen(args->folderPath) <= 0){
+        printf("Error: The length of the path provided was %d which is invalid.\n",strlen(args->folderPath));    
+        return -1;
+    }
+      // int bufSize;
+    // char* folderPath;))
+    // if(args->folderPath )
+
+}

@@ -1,5 +1,6 @@
 #ifndef FILE
 #define FILE
 
+int validPath();
 
-#endif FILE
+#endif 
