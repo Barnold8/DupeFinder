@@ -28,6 +28,11 @@ int validPath(char* path){
         int returnValue = system(string);
         system("cls"); // just to clean up really
 
+        if(string != NULL){
+            free(string);
+            string = NULL;
+        }
+    
         return (returnValue != 0) ? 0 : 1; // stupid
 
     #elif __linux__ 
@@ -42,12 +47,20 @@ int validPath(char* path){
         int returnValue = system(string);
         system("clear"); // just to clean up really
 
+        if(string != NULL){
+            free(string);
+            string = NULL;
+        }
+    
         return (returnValue != 0) ? 0 : 1; // stupid
     
     #else
 
         printf("Warning! You are attempting to run this code ona system that does not support it. This program is intended for Windows and Linux systems\n");
-
+        if(string != NULL){
+            free(string);
+            string = NULL;
+        }
         return 0;
     #endif
 
@@ -55,7 +68,25 @@ int validPath(char* path){
         free(string);
         string = NULL;
     }
- 
 
     return 0;
+}
+
+void getFiles(char* path){
+    
+
+    #ifdef _WIN32 
+
+        printf("Win32");
+
+    #elif __linux__
+
+        printf("Linux");
+
+    #else
+
+        printf("Warning! You are attempting to run this code ona system that does not support it. This program is intended for Windows and Linux systems\n");
+        // return something to signify that an error has ocurred 
+    #endif
+
 }

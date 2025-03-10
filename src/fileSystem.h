@@ -3,4 +3,6 @@
 
 int validPath(char* path);
 
+void getFiles(char* path);
+
 #endif 
