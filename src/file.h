@@ -1,6 +1,6 @@
 #ifndef FILE
 #define FILE
 
-int validPath();
+int validPath(char* path);
 
 #endif 

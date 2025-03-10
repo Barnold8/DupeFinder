@@ -7,8 +7,6 @@
 
 int main(int argc, char *argv[]){
 
-    // printf("Gathering args...\n");
-
     FILE *fptr;
 
     argsResult arguments = {0};
@@ -19,17 +17,16 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    fptr = fopen("test/video1.mp4", "rb");
-    // fptr = fopen("test/test.txt", "rb");
-
-    if (fptr == NULL)
-    {
-         printf("The file could not be read");
-         fflush(stdout);
-         return 1;     
-    }   
-
-    fileHash(fptr,arguments.bufSize);
-
     return 0;
 }
+    // fptr = fopen("test/video1.mp4", "rb");
+    // fptr = fopen("test/test.txt", "rb");
+
+    // if (fptr == NULL)
+    // {
+    //      printf("The file could not be read");
+    //      fflush(stdout);
+    //      return 1;     
+    // }   
+
+    // fileHash(fptr,arguments.bufSize);
