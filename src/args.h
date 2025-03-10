@@ -3,7 +3,7 @@
 
 typedef struct argsResult{
 
-    int bufSize;
+    unsigned int bufSize;
     char* folderPath;
 
 }argsResult;

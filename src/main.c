@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "args.h"
 #include "hash.h"
 
@@ -6,28 +7,29 @@
 
 int main(int argc, char *argv[]){
 
+    // printf("Gathering args...\n");
+
     FILE *fptr;
 
-    argsResult a = handleArgs(argc,argv);
-
-    if(!(validArgs(&a))){
-        return -1;
+    argsResult arguments = {0};
+    arguments = handleArgs(argc,argv);
+   
+    if(!(validArgs(&arguments))){
+        printf("Invalid args\n");
+        return 1;
     }
 
-    char buf[1028];
-
-    setbuf(stdin, buf);
-
-    // fptr = fopen("test/video1.mp4", "rb");
-    fptr = fopen("test/test.txt", "rb");
+    fptr = fopen("test/video1.mp4", "rb");
+    // fptr = fopen("test/test.txt", "rb");
 
     if (fptr == NULL)
     {
          printf("The file could not be read");
-         return 0;     
+         fflush(stdout);
+         return 1;     
     }   
 
-    fileHash(fptr);
+    fileHash(fptr,arguments.bufSize);
 
     return 0;
 }

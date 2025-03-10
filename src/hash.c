@@ -1,22 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //http://www.cse.yorku.ca/~oz/hash.html
 
-void fileHash(FILE* fptr){
+void fileHash(FILE* fptr, unsigned int buffer_size){
 
-    //TODO read file byte by byte and continue hash
+    unsigned char *buffer = malloc(buffer_size);
 
-    int byte;
-    long position = 0;  // Track the byte position
-    unsigned long hash = 5381;
-
-    while ((byte = fgetc(fptr)) != EOF) {
-        // Each byte is an int (0–255), EOF is -1
-        hash = ((hash << 5) + hash) + byte;  // hash * 33 + data[i]
-        // position++;
+    if (!buffer) {
+        printf("Memory allocation failed!\n");
+        return;
     }
 
-    printf("Resulting hash: %d\n",hash);
+    size_t bytesRead;
+    unsigned long hash = 5381;
+ 
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer), fptr)) > 0) {
+
+        for (size_t i = 0; i < bytesRead; i++) {
+            hash = ((hash << 5) + hash) + buffer[i];  
+        }
+    }
+
+    printf("Resulting hash: %lu\n",hash);
+    free(buffer);
 
 }
 
