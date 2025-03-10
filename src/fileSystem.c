@@ -43,6 +43,12 @@ int validPath(char* path){
         system("clear"); // just to clean up really
 
         return (returnValue == 1) ? 0 : 1; // stupid
+    
+    #else
+
+        printf("Warning! You are attempting to run this code ona system that does not support it. This program is intended for Windows and Linux systems\n");
+
+        return 0;
     #endif
 
     if(string != NULL){
