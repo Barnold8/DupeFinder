@@ -120,7 +120,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                         .fileName = strdup(dir->d_name),
                         .fileHash = fileHash(fptr,buffer_size)
                     };
-
+                    
                     addFilePtrElements(&files,_file);
 
                     fclose(fptr);

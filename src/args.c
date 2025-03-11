@@ -56,7 +56,7 @@ argsResult handleArgs(int argc, char *argv[]){
                     break;
                 
                 case 'd':
-                    printf("Flag check succeeded (d)\n");
+                    
                     if (i >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
                         // FAILURE
      
