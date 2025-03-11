@@ -3,6 +3,4 @@
 
 unsigned long fileHash(FILE* fptr, unsigned int buffer_size);
 
-
-
 #endif
