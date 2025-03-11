@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-#include "args.h"
-#include "hash.h"
+#include "args.h"           // for parsing cli args
 #include "fileSystem.h"
-#include "memory.h"
 #include "utils.h"
 
 // This program aims to find duplicate files by hashing the entire byte array read from a file and comparing hashes with other hashes
 
-//TODO: Sort the array of files and then use that for checking adjacent hashes for duplicates
+//TODO: pass the buffer size to dictate the read width
 
 int main(int argc, char *argv[]){
 
@@ -21,12 +19,12 @@ int main(int argc, char *argv[]){
     }
 
     if(validPath(arguments.folderPath)){
-        //printf("\nFile[%d]\n\n\t\t[FILE_PATH]: %s\n\t\t[FILE_NAME]: %s\n\t\t[FILE_HASH] %lu\n\n",i,files.items[i].filePath,files.items[i].fileName,files.items[i].fileHash);
-        filePtrArray files = getFiles(arguments.folderPath);
+
+        filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize);
         filePtrArray dupes = findDuplicates(&files);
 
         for(int i = 0; i < dupes.count; i++){
-            printf("\nDuplicate found: \n\n\t\t[FILE_NAME] %s\n\n\t\t[FILE_PATH] %s\n\n", dupes.items[i].filePath,dupes.items[i].fileName);
+            printf("\nDuplicate found: \n\n\t\t[FILE_NAME] %s\n\n\t\t[FILE_PATH] %s\n\n",dupes.items[i].fileName,dupes.items[i].filePath);
         }
 
     }

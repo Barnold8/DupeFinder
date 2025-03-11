@@ -77,7 +77,7 @@ int validPath(char* path){
     return 0;
 }
 
-filePtrArray getFiles(char* path) {
+filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
     // Only compatible compilers:
         // GCC (MinGW-w64)
@@ -116,7 +116,7 @@ filePtrArray getFiles(char* path) {
                     hashedFile _file = {
                         .filePath = strdup(fullPath),
                         .fileName = strdup(dir->d_name),
-                        .fileHash = fileHash(fptr,1024)
+                        .fileHash = fileHash(fptr,buffer_size)
                     };
 
                     addFilePtrElements(&files,_file);

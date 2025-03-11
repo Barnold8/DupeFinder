@@ -9,7 +9,7 @@ typedef struct hashedFile {
     unsigned long fileHash;
 } hashedFile;
 
-filePtrArray getFiles(char* path);
+filePtrArray getFiles(char* path,unsigned int buffer_size);
 
 int validPath(char* path);
 

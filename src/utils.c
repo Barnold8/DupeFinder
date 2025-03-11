@@ -30,6 +30,12 @@ filePtrArray findDuplicates(filePtrArray* arr){
         }
     }
 
+    if(arr->items){
+        // We are now done with the hashed files on the disk so we can free their contents
+        free(arr->items);
+        arr->items = NULL;
+    }
+
     return duplicateFiles;
 }
 
