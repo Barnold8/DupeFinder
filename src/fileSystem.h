@@ -1,12 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-typedef struct dynamic_file_array fileArray;
-
-typedef struct file {
-    char* filePath;
-    char* fileName;
-} file;
+typedef struct dynamic_fileptr_array filePtrArray;
 
 typedef struct hashedFile {
     char* filePath;
@@ -14,8 +9,7 @@ typedef struct hashedFile {
     unsigned long fileHash;
 } hashedFile;
 
-
-fileArray getFiles(char* path);
+filePtrArray getFiles(char* path);
 
 int validPath(char* path);
 

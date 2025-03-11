@@ -18,9 +18,11 @@ int main(int argc, char *argv[]){
     }
 
     if(validPath(arguments.folderPath)){
-        fileArray files = getFiles(arguments.folderPath);
+        filePtrArray files = getFiles(arguments.folderPath);
         for(int i = 0; i < files.count; i++){
-           
+
+            printf("\nFile[%d]\n\n\t\t[FILE_PATH]: %s\n\t\t[FILE_NAME]: %s\n\t\t[FILE_HASH] %lu\n\n",i,files.items[i].filePath,files.items[i].fileName,files.items[i].fileHash);
+
         }
     }
 

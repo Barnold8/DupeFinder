@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include "fileSystem.h"
 #include "memory.h"
+#include "hash.h"
 
 
 int validPath(char* path){
@@ -76,7 +77,7 @@ int validPath(char* path){
     return 0;
 }
 
-fileArray getFiles(char* path) {
+filePtrArray getFiles(char* path) {
 
     // Only compatible compilers:
         // GCC (MinGW-w64)
@@ -87,7 +88,7 @@ fileArray getFiles(char* path) {
     struct dirent *dir;
     struct stat fileStat;
     char fullPath[1024];
-    fileArray files = {0};
+    filePtrArray files = {0};
 
     d = opendir(path);
     if (!d) {
@@ -103,12 +104,29 @@ fileArray getFiles(char* path) {
         if (stat(fullPath, &fileStat) == 0) {
                 if (S_ISREG(fileStat.st_mode)) {
 
-                    file _file = {
+                    FILE* fptr;
+
+                    fptr = fopen(strdup(fullPath), "rb");
+                    
+                    if(!fptr){
+                        printf("Error reading %s\n",strdup(fullPath));
+                        continue;
+                    }
+
+                    hashedFile _file = {
                         .filePath = strdup(fullPath),
-                        .fileName = strdup(dir->d_name)
+                        .fileName = strdup(dir->d_name),
+                        .fileHash = fileHash(fptr,1024)
                     };
 
-                    addFileElements(&files,_file);
+                    // file _file = {
+                    //     .filePath = strdup(fullPath),
+                    //     .fileName = strdup(dir->d_name)
+                    // };
+
+                    addFilePtrElements(&files,_file);
+
+                    fclose(fptr);
                 }
 
         } else {
