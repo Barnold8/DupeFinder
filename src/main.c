@@ -19,7 +19,9 @@ int main(int argc, char *argv[]){
 
     if(validPath(arguments.folderPath)){
         fileArray files = getFiles(arguments.folderPath);
-        printf("File array:\n\n\tCount %d\n\n\tCapacity %d\n\n",files.count,files.capacity);
+        for(int i = 0; i < files.count; i++){
+           
+        }
     }
 
     else {

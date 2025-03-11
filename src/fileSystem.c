@@ -104,13 +104,11 @@ fileArray getFiles(char* path) {
                 if (S_ISREG(fileStat.st_mode)) {
 
                     file _file = {
-                        .filePath = fullPath,
-                        .fileName = dir->d_name
+                        .filePath = strdup(fullPath),
+                        .fileName = strdup(dir->d_name)
                     };
 
                     addFileElements(&files,_file);
-
-                    // printf("[FILE] %s | [FILEPATH] %s\n",dir->d_name,fullPath);
                 }
 
         } else {
