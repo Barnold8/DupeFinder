@@ -1,5 +1,5 @@
-#ifndef FILE
-#define FILE
+#ifndef FILE_H
+#define FILE_H
 
 typedef struct dynamic_file_array fileArray;
 
@@ -18,6 +18,8 @@ typedef struct hashedFile {
 fileArray getFiles(char* path);
 
 int validPath(char* path);
+
+
 
 #endif
 
