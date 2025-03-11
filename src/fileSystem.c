@@ -119,11 +119,6 @@ filePtrArray getFiles(char* path) {
                         .fileHash = fileHash(fptr,1024)
                     };
 
-                    // file _file = {
-                    //     .filePath = strdup(fullPath),
-                    //     .fileName = strdup(dir->d_name)
-                    // };
-
                     addFilePtrElements(&files,_file);
 
                     fclose(fptr);
