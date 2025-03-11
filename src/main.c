@@ -23,7 +23,11 @@ int main(int argc, char *argv[]){
     if(validPath(arguments.folderPath)){
         //printf("\nFile[%d]\n\n\t\t[FILE_PATH]: %s\n\t\t[FILE_NAME]: %s\n\t\t[FILE_HASH] %lu\n\n",i,files.items[i].filePath,files.items[i].fileName,files.items[i].fileHash);
         filePtrArray files = getFiles(arguments.folderPath);
-        findDuplicates(&files);
+        filePtrArray dupes = findDuplicates(&files);
+
+        for(int i = 0; i < dupes.count; i++){
+            printf("\nDuplicate found: \n\n\t\t[FILE_NAME] %s\n\n\t\t[FILE_PATH] %s\n\n", dupes.items[i].filePath,dupes.items[i].fileName);
+        }
 
     }
 

@@ -6,6 +6,6 @@
 
 int compare(const void* a, const void* b);
 void sortFiles(hashedFile* files, size_t count);
-void findDuplicates(filePtrArray* arr);
+filePtrArray findDuplicates(filePtrArray* arr);
 
 #endif
