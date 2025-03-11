@@ -3,13 +3,13 @@
 
 //http://www.cse.yorku.ca/~oz/hash.html
 
-void fileHash(FILE* fptr, unsigned int buffer_size){
+unsigned long fileHash(FILE* fptr, unsigned int buffer_size){
 
     unsigned char *buffer = malloc(buffer_size);
 
     if (!buffer) {
         printf("Memory allocation failed!\n");
-        return;
+        return 1;
     }
 
     size_t bytesRead;
@@ -21,9 +21,10 @@ void fileHash(FILE* fptr, unsigned int buffer_size){
             hash = ((hash << 5) + hash) + buffer[i];  
         }
     }
-
-    printf("Resulting hash: %lu\n",hash);
+    
     free(buffer);
+
+    return hash;
 
 }
 
