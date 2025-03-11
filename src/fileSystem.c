@@ -101,6 +101,8 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
         snprintf(fullPath, sizeof(fullPath), "%s/%s", path, dir->d_name);
 
+        printf("Grabbing file [%s]\n\n",fullPath);
+
         if (stat(fullPath, &fileStat) == 0) {
                 if (S_ISREG(fileStat.st_mode)) {
 
