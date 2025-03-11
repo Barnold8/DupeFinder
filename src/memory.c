@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-void addElements(fileArray* fileArray, file _file){
+void addFileElements(fileArray* fileArray, file _file){
 
     if(fileArray->count >= fileArray->capacity){ // if the count is equal to or higher than the capacity
         

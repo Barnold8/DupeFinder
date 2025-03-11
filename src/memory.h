@@ -17,7 +17,7 @@ typedef struct dynamic_file_array{
     size_t capacity;
 }fileArray;
 
-void addElements(fileArray* fileArray, file _file);
+void addFileElements(fileArray* fileArray, file _file);
 
 
 #endif
