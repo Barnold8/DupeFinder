@@ -1,14 +1,23 @@
 #ifndef FILE
 #define FILE
 
-typedef struct hashedFile{
-    char* filePath;
-    unsigned long fileHash;
-}hashedFile;
+typedef struct dynamic_file_array fileArray;
 
+typedef struct file {
+    char* filePath;
+    char* fileName;
+} file;
+
+typedef struct hashedFile {
+    char* filePath;
+    char* fileName;
+    unsigned long fileHash;
+} hashedFile;
+
+
+fileArray getFiles(char* path);
 
 int validPath(char* path);
 
-void getFiles(char* path);
+#endif
 
-#endif 

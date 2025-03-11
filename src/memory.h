@@ -2,22 +2,21 @@
 #define MEMORY
 #include <stddef.h>
 
-#include "fileSystem.h"
 
+#include "fileSystem.h"  
 
-typedef struct dynamic_int_array{
+typedef struct dynamic_int_array {
     int* items;
     size_t count;
     size_t capacity;
 } intArray;
 
-typedef struct dynamic_file_array{
-    file* items;
+typedef struct dynamic_file_array {
+    file* items; 
     size_t count;
     size_t capacity;
-}fileArray;
+} fileArray;
 
 void addFileElements(fileArray* fileArray, file _file);
-
 
 #endif
