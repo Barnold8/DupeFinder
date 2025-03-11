@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <sys/stat.h>
 #include "fileSystem.h"
+#include "memory.h"
 
 
 int validPath(char* path){
@@ -74,20 +76,49 @@ int validPath(char* path){
     return 0;
 }
 
-void getFiles(char* path){
-    
-    hashedFile* files;
+fileArray getFiles(char* path) {
+
+    // Only compatible compilers:
+        // GCC (MinGW-w64)
+        // MSYS2 (GCC-based) 
+        // Cygwin (GCC-based) 
 
     DIR *d;
     struct dirent *dir;
-    d = opendir(".");
-    if (d) {
-        while ((dir = readdir(d)) != NULL) {
-        printf("%s\n", dir->d_name);
-        }
-        closedir(d);
+    struct stat fileStat;
+    char fullPath[1024];
+    fileArray files = {0};
+
+    d = opendir(path);
+    if (!d) {
+        printf("Failed to open directory: %s\n", path);
+        return files;
     }
-    
 
+    while ((dir = readdir(d)) != NULL) {
+        if (dir->d_name[0] == '.') continue; 
 
+        snprintf(fullPath, sizeof(fullPath), "%s/%s", path, dir->d_name);
+
+        if (stat(fullPath, &fileStat) == 0) {
+                if (S_ISREG(fileStat.st_mode)) {
+
+                    file _file = {
+                        .filePath = fullPath,
+                        .fileName = dir->d_name
+                    };
+
+                    addFileElements(&files,_file);
+
+                    // printf("[FILE] %s | [FILEPATH] %s\n",dir->d_name,fullPath);
+                }
+
+        } else {
+            printf("Error getting info for: %s\n", fullPath);
+        }
+    }
+
+    closedir(d);
+
+    return files;
 }

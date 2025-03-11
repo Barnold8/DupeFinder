@@ -3,6 +3,7 @@
 #include "args.h"
 #include "hash.h"
 #include "fileSystem.h"
+#include "memory.h"
 
 // This program aims to find duplicate files by hashing the entire byte array read from a file and comparing hashes with other hashes
 
@@ -17,8 +18,10 @@ int main(int argc, char *argv[]){
     }
 
     if(validPath(arguments.folderPath)){
-        getFiles(arguments.folderPath);
+        fileArray files = getFiles(arguments.folderPath);
+        printf("File array:\n\n\tCount %d\n\n\tCapacity %d\n\n",files.count,files.capacity);
     }
+
     else {
         printf("%s is a not valid path!\n",arguments.folderPath);
         return 1;
