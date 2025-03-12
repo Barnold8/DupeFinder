@@ -1,7 +1,6 @@
-#ifndef MEMORY
-#define MEMORY
+#ifndef MEMORY_H
+#define MEMORY_H
 #include <stddef.h>
-
 
 #include "fileSystem.h"  
 
@@ -18,13 +17,13 @@ typedef struct dynamic_fileptr_array {
 } filePtrArray;
 
 typedef struct dynamic_string_array {
-    char* items; 
+    char** items; 
     size_t count;
     size_t capacity;
 } strArray;
 
 void addFilePtrElements(filePtrArray* filePtrArray, hashedFile _filePtr);
 
-void addFilePtrElements(strArray* stringArray, char* string);
+void addStringElements(strArray* stringArray, char* string);
 
 #endif

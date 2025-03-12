@@ -17,7 +17,7 @@ void addFilePtrElements(filePtrArray* filePtrArray, hashedFile _filePtr){
 
 }
 
-void addFilePtrElements(strArray* stringArray, char* string){
+void addStringElements(strArray* stringArray, char* string){
 
     
     if(stringArray->count >= stringArray->capacity){ // if the count is equal to or higher than the capacity
