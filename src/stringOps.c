@@ -17,19 +17,22 @@ int stringIsNum(char* string){
     return 1;
 }
 
-strArray stringSplit(char* string, char delim){
+strArray stringSplit(char* string, const char* delim) {
+    strArray splitStrings = {0};
 
-    strArray splitStrings;
+    printf("Split String:\n\n\t\tPREV: %s\n\n\t\tNOW:\n",string);
 
-    char* token = strtok(string, " ");
- 
+    char* token = strtok(string, delim); 
+
+    if(token == NULL){
+        printf("Error: initial token in split string function returns NULL\n");
+        return splitStrings;
+    }
 
     while (token != NULL) {
-        printf(" % s\n", token);
-        token = strtok(NULL, " - ");
+        addStringElements(&splitStrings,token);
+        token = strtok(NULL, delim);
     }
 
     return splitStrings;
-
 }
-
