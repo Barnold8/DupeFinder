@@ -18,10 +18,8 @@ int stringIsNum(char* string){
 }
 
 strArray stringSplit(char* string, const char* delim) {
+    
     strArray splitStrings = {0};
-
-    printf("Split String:\n\n\t\tPREV: %s\n\n\t\tNOW:\n",string);
-
     char* token = strtok(string, delim); 
 
     if(token == NULL){
