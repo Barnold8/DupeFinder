@@ -79,11 +79,6 @@ int validPath(char* path){
 
 filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
-    // Only compatible compilers:
-        // GCC (MinGW-w64)
-        // MSYS2 (GCC-based) 
-        // Cygwin (GCC-based) 
-
     DIR *d;
     struct dirent *dir;
     struct stat fileStat;
@@ -134,4 +129,24 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
     closedir(d);
 
     return files;
+}
+
+
+void handleDupes(filePtrArray* files){ 
+
+    filePtrArray dupes = findDuplicates(files);
+
+    if(files->items != NULL) free(files->items);
+
+    if(dupes.count >=1){
+        printf("===================Duplicates found===================\n\n");
+        for(int i = 0; i < dupes.count; i++){
+            printf("\n\t\t[%d] [FILE_NAME] %s | [FILE_PATH] %s\n\n",i,dupes.items[i].fileName,dupes.items[i].filePath);
+        }
+        printf("\n\nOptions:\n\n\t\tWrite the file numbers (as seen on the left of each found file, to remove them)\n\n\t\tWrite -1 to remove all files\n\n\t\tWrite a range to delete that range of files (n-m) delete files in range n to m\n\n\t\tWrite -2 to quit\n\n\n\n");
+        parseInput();
+    }else{
+        printf("===================No duplicates found===================\n\n");
+    }
+
 }

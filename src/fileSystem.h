@@ -13,7 +13,7 @@ filePtrArray getFiles(char* path,unsigned int buffer_size);
 
 int validPath(char* path);
 
-
+void handleDupes(filePtrArray* files);
 
 #endif
 
