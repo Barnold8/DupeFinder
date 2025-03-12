@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define INPUT_BUFFER 1024
+
 int stringIsNum(char* string){
 
     int pointer = 0;
@@ -57,3 +59,29 @@ intArray strArrToIntArr(strArray* strArray){
 
     return ints;
 }
+
+
+void parseInput(){ // move to stringops file
+
+    char userInput[INPUT_BUFFER];
+    int stringLen;
+
+    printf("Enter here: ");
+
+    if (fgets(userInput, sizeof(userInput), stdin) != NULL) {
+        userInput[strcspn(userInput, "\n")] = '\0'; 
+    }
+    
+    strArray splitStrings = stringSplit(userInput," ");
+
+    if(splitStrings.capacity <= 0){
+        if(splitStrings.items != NULL) free(splitStrings.items);
+        printf("Error PLACEHOLDER\n");
+        return;
+    }
+
+    if(splitStrings.count != -1){
+        intArray ints = strArrToIntArr(&splitStrings);
+    }
+
+} 

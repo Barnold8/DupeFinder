@@ -9,4 +9,6 @@ strArray stringSplit(char* string, const char* delim);
 
 intArray strArrToIntArr(strArray* strArray);
 
+void parseInput();
+
 #endif
