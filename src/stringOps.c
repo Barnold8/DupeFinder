@@ -38,7 +38,7 @@ strArray stringSplit(char* string, const char* delim) {
 intArray strArrToIntArr(strArray* strArray){
 
     intArray ints = {0};
-    
+
     for(int i = 0; i < strArray->count; i++){
 
         if(stringIsNum(strArray->items[i])){
@@ -50,6 +50,8 @@ intArray strArrToIntArr(strArray* strArray){
             return ints;
         }
     }
+
+    free(strArray->items);
 
     return ints;
 }
