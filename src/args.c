@@ -46,7 +46,6 @@ argsResult handleArgs(int argc, char *argv[]){
 
                     if(!(numberString && stringIsNum(numberString))){
                         // FAILURE
-     
                         printf("PLACEHOLDER FAILURE\n");
                         return args;
                     }
