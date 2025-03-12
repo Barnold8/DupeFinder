@@ -137,6 +137,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
 void handleDupes(filePtrArray* files){ 
 
     filePtrArray dupes = findDuplicates(files);
+    char* string = (char*) malloc((1024)*sizeof(char)); // personally, might be overkill
 
     if(files->items != NULL) free(files->items);
 
@@ -159,7 +160,36 @@ void handleDupes(filePtrArray* files){
 
                     case -1:
                         // remove all files
-                        printf("Removing all files\n");
+
+                        for(int i = 0; i < dupes.count; i++){
+
+                            int pathLen = strlen(dupes.items[i].filePath);
+
+                            #ifdef _WIN32
+                            
+                                char* del = "del \"";
+                                int delLen = strlen(del);
+                                
+                                memcpy(string, del, delLen); 
+                                memcpy(string + delLen, dupes.items[i].filePath, pathLen+1); 
+
+                                fixPath(string);
+
+                                string[strlen(string)] = '"';
+                                string[strlen(string)+1] = '\0';
+
+                                printf("RUNNING: %s\n",string);
+
+                                system(string);
+                                
+                           
+                                // printf("\n\t\t[%d] [FILE_NAME] %s | [FILE_PATH] %s\n\n",i,dupes.items[i].fileName,dupes.items[i].filePath);
+
+                            #elif __linux__
+    
+                            #endif
+                        }
+
                         break;
 
                     case -2:
@@ -172,11 +202,19 @@ void handleDupes(filePtrArray* files){
 
             }
 
+        }else{
+
+
         }
 
 
     }else{
         printf("===================No duplicates found===================\n\n");
+    }
+
+
+    if(string != NULL){
+        free(string);
     }
 
 }

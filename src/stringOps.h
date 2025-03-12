@@ -11,4 +11,6 @@ intArray strArrToIntArr(strArray* strArray);
 
 intArray parseInput();
 
+void fixPath(char* path);
+
 #endif

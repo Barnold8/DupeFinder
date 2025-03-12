@@ -60,7 +60,7 @@ intArray strArrToIntArr(strArray* strArray){ // error in here with negative numb
     }
 
     free(strArray->items);
-    
+
     return ints;
 }
 
@@ -95,4 +95,17 @@ intArray parseInput(){
         
     }
     return parsedInput;
+} 
+
+
+void fixPath(char* path) {
+    int pointer = 0;
+
+    while (path != NULL && path[pointer] != '\0') {
+
+        if (path[pointer] == '/') {
+            path[pointer] = '\\'; 
+        }
+        pointer++;
+    }
 } 
