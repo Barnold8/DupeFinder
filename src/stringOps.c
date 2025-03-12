@@ -60,13 +60,7 @@ intArray strArrToIntArr(strArray* strArray){ // error in here with negative numb
     }
 
     free(strArray->items);
-
-    for(int i = 0; i < ints.count; i++){
-
-        printf("ints[%d]: %d\n\n",i, ints.items[i]);
-
-    }
-
+    
     return ints;
 }
 
