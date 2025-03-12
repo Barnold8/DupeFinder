@@ -26,4 +26,6 @@ void addFilePtrElements(filePtrArray* filePtrArray, hashedFile _filePtr);
 
 void addStringElements(strArray* stringArray, char* string);
 
+void addIntElements(strArray* intArray, int num);
+
 #endif
