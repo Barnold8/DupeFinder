@@ -61,10 +61,11 @@ intArray strArrToIntArr(strArray* strArray){
 }
 
 
-void parseInput(){ // move to stringops file
+intArray parseInput(){ // move to stringops file
 
     char userInput[INPUT_BUFFER];
     int stringLen;
+    intArray parsedInput = {0};
 
     printf("Enter here: ");
 
@@ -76,12 +77,18 @@ void parseInput(){ // move to stringops file
 
     if(splitStrings.capacity <= 0){
         if(splitStrings.items != NULL) free(splitStrings.items);
+        
+        parsedInput.count = -1;
+        
         printf("Error PLACEHOLDER\n");
-        return;
+
+        return parsedInput;
     }
 
     if(splitStrings.count != -1){
-        intArray ints = strArrToIntArr(&splitStrings);
+        parsedInput = strArrToIntArr(&splitStrings);
+        return parsedInput;
+        
     }
-
+    return parsedInput;
 } 
