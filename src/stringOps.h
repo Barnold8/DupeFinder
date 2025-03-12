@@ -7,4 +7,6 @@ int stringIsNum(char* string);
 
 strArray stringSplit(char* string, const char* delim);
 
+intArray strArrToIntArr(strArray* strArray);
+
 #endif
