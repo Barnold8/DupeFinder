@@ -40,6 +40,13 @@ unsigned long fileHash(FILE* fptr, unsigned int buffer_size){
     
     free(buffer);
 
+
+    #ifdef _WIN32
+    system("cls"); 
+    #else
+        system("clear"); 
+    #endif
+
     return hash;
 
 }
