@@ -13,7 +13,7 @@
 
 //TODO: give functionality to delete specific files given idexes,delete all files, delete range, or just quit
 
-void parseInput(){
+void parseInput(){ // move to stringops file
 
     char userInput[INPUT_BUFFER];
     int stringLen;
@@ -24,16 +24,30 @@ void parseInput(){
         userInput[strcspn(userInput, "\n")] = '\0'; 
     }
     
-    stringLen = strlen(userInput); // needed because user input string can be < INPUT_BUFFER
+    strArray splitStrings = stringSplit(userInput," ");
 
-    stringSplit(userInput," ");
+    if(splitStrings.capacity <= 0){
+        if(splitStrings.items != NULL) free(splitStrings.items);
+        printf("Error PLACEHOLDER\n");
+        return;
+    }
 
+    if(splitStrings.count != -1){
+        intArray ints = strArrToIntArr(&splitStrings);
+
+        for(int i = 0; i < ints.count; i++){
+            printf("INT[%d] : %d\n",i,ints.items[i]);
+        }
+
+    }
 
 } 
 
-void handleDupes(filePtrArray* files){
+void handleDupes(filePtrArray* files){ // move to filesystem file
 
     filePtrArray dupes = findDuplicates(files);
+
+    if(files->items != NULL) free(files->items);
 
     if(dupes.count >=1){
         printf("===================Duplicates found===================\n\n");

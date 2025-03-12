@@ -43,7 +43,6 @@ intArray strArrToIntArr(strArray* strArray){
     intArray ints = {0};
 
     for(int i = 0; i < strArray->count; i++){
-        printf("Converting %s to int | CONVERTED VALUE %d\n",strArray->items[i],atoi(strArray->items[i]));
         if(stringIsNum(strArray->items[i])){
             int num = atoi(strArray->items[i]);
             addIntElements(&ints,atoi(strArray->items[i]));
