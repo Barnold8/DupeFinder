@@ -6,12 +6,11 @@
 
 int stringIsNum(char* string){
 
-    int boolean = 0;
     int pointer = 0;
 
     while(string[pointer] != '\0'){
 
-        if((string[pointer] >=48 && string[pointer] <= 57)) return 0;
+        if(!(string[pointer] >=48 && string[pointer] <= 57)) return 0;
         pointer++;
     }
     
