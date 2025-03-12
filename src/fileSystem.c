@@ -6,6 +6,8 @@
 #include "fileSystem.h"
 #include "memory.h"
 #include "hash.h"
+#include "utils.h"
+#include "stringOps.h"
 
 
 int validPath(char* path){
@@ -140,11 +142,39 @@ void handleDupes(filePtrArray* files){
 
     if(dupes.count >=1){
         printf("===================Duplicates found===================\n\n");
+        
         for(int i = 0; i < dupes.count; i++){
             printf("\n\t\t[%d] [FILE_NAME] %s | [FILE_PATH] %s\n\n",i,dupes.items[i].fileName,dupes.items[i].filePath);
         }
-        printf("\n\nOptions:\n\n\t\tWrite the file numbers (as seen on the left of each found file, to remove them)\n\n\t\tWrite -1 to remove all files\n\n\t\tWrite a range to delete that range of files (n-m) delete files in range n to m\n\n\t\tWrite -2 to quit\n\n\n\n");
-        parseInput();
+
+        printf("\n\nOptions:\n\n\t\tWrite the file numbers (as seen on the left of each found file, to remove them)\n\n\t\tWrite -1 to remove all files\n\n\t\tWrite -2 and then a range to delete that range of files (n-m). This deletes files in range n to m\n\n\t\tWrite -3 to quit\n\n\n\n");
+        
+        intArray parsedInput = parseInput();
+
+        if(parsedInput.count != -1){
+
+            if(parsedInput.count >= 1 &&parsedInput.items[0] <= -1){
+                
+                switch(parsedInput.items[0]){
+
+                    case -1:
+                        // remove all files
+                        printf("Removing all files\n");
+                        break;
+
+                    case -2:
+                        return;
+
+                    default:
+                        return;
+                }
+
+
+            }
+
+        }
+
+
     }else{
         printf("===================No duplicates found===================\n\n");
     }
