@@ -138,6 +138,7 @@ void handleDupes(filePtrArray* files){
 
     filePtrArray dupes = findDuplicates(files);
     char* string = (char*) malloc((1024)*sizeof(char)); // personally, might be overkill
+    char* optionsString = "\n\nOptions:\n\n\t\tWrite the file numbers (as seen on the left of each found file, to remove them)\n\n\t\tWrite -1 to remove all files\n\n\t\tWrite -2 and then a range to delete that range of files (n-m). This deletes files in range n to m\n\n\t\tWrite -3 to quit\n\n\n\n";
 
     if(files->items != NULL) free(files->items);
 
@@ -148,7 +149,7 @@ void handleDupes(filePtrArray* files){
             printf("\n\t\t[%d] [FILE_NAME] %s | [FILE_PATH] %s\n\n",i,dupes.items[i].fileName,dupes.items[i].filePath);
         }
 
-        printf("\n\nOptions:\n\n\t\tWrite the file numbers (as seen on the left of each found file, to remove them)\n\n\t\tWrite -1 to remove all files\n\n\t\tWrite -2 and then a range to delete that range of files (n-m). This deletes files in range n to m\n\n\t\tWrite -3 to quit\n\n\n\n");
+        printf(optionsString);
         
         intArray parsedInput = parseInput();
 
@@ -178,15 +179,24 @@ void handleDupes(filePtrArray* files){
                                 string[strlen(string)] = '"';
                                 string[strlen(string)+1] = '\0';
 
-                                printf("RUNNING: %s\n",string);
-
                                 system(string);
-                                
-                           
-                                // printf("\n\t\t[%d] [FILE_NAME] %s | [FILE_PATH] %s\n\n",i,dupes.items[i].fileName,dupes.items[i].filePath);
+
 
                             #elif __linux__
     
+                                char* rm = "rm \"";
+                                int rmLen = strlen(rm);
+                                
+                                memcpy(string, rm, rmLen); 
+                                memcpy(string + rmLen, dupes.items[i].filePath, pathLen+1); 
+
+                                fixPath(string);
+
+                                string[strlen(string)] = '"';
+                                string[strlen(string)+1] = '\0';
+
+                                system(string);
+
                             #endif
                         }
 
