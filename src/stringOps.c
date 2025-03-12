@@ -11,9 +11,10 @@ int stringIsNum(char* string){
 
     while(string[pointer] != '\0'){
         if(pointer == 0 && string[pointer] == '-'){
+            pointer++;
             continue;
         }else{
-            if(!(string[pointer] >=48 && string[pointer] <= 57)) return 0;
+            if(!(string[pointer] >= 48 && string[pointer] <= 57)) return 0;
         }
         pointer++;
     }
@@ -40,7 +41,7 @@ strArray stringSplit(char* string, const char* delim) {
 }
 
 
-intArray strArrToIntArr(strArray* strArray){
+intArray strArrToIntArr(strArray* strArray){ // error in here with negative numbers
 
     intArray ints = {0};
 
@@ -48,20 +49,29 @@ intArray strArrToIntArr(strArray* strArray){
         if(stringIsNum(strArray->items[i])){
             int num = atoi(strArray->items[i]);
             addIntElements(&ints,atoi(strArray->items[i]));
+
         }else{
+            
             printf("PLACEHOLDER ERROR\n");
             ints.count = -1; // using this for an error value
             return ints;
+            
         }
     }
 
     free(strArray->items);
 
+    for(int i = 0; i < ints.count; i++){
+
+        printf("ints[%d]: %d\n\n",i, ints.items[i]);
+
+    }
+
     return ints;
 }
 
 
-intArray parseInput(){ // move to stringops file
+intArray parseInput(){ 
 
     char userInput[INPUT_BUFFER];
     int stringLen;
