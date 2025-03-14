@@ -48,7 +48,7 @@ intArray strArrToIntArr(strArray* strArray){ // error in here with negative numb
     for(int i = 0; i < strArray->count; i++){
         if(stringIsNum(strArray->items[i])){
             int num = atoi(strArray->items[i]);
-            addIntElements(&ints,atoi(strArray->items[i]));
+            addIntElements(&ints,num);
 
         }else{
             
@@ -68,7 +68,6 @@ intArray strArrToIntArr(strArray* strArray){ // error in here with negative numb
 intArray parseInput(){ 
 
     char userInput[INPUT_BUFFER];
-    int stringLen;
     intArray parsedInput = {0};
 
     printf("Enter here: ");

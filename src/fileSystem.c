@@ -131,8 +131,7 @@ void handleDupes(filePtrArray* files){
                         for(int i = 0; i < dupes.count; i++){
 
                             char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
-                            int pathLen = strlen(dupes.items[i].filePath);
-
+                        
                             #ifdef _WIN32 // attempted to merge strings but failed lol
                             
                                 char* del = mergeStrings("del \"",pathAmmended);

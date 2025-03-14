@@ -90,9 +90,7 @@ argsResult handleArgs(int argc, char *argv[]){
 
 int validArgs(argsResult * args){
 
-    int len = strlen(args->folderPath);
     char decision;
-
 
     if(args->bufSize <= 0){
         printf("Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
