@@ -113,16 +113,24 @@ void fixPath(char* path) {
 
 char* mergeStrings(char* leftString, char* rightString){
 
-                                                  // Total size of left string + right string and a null termination char
-    char* newString = (char*)malloc(sizeof(char)*(strlen(leftString)+strlen(rightString)+1));
+    if(leftString == NULL){
+        printf("Error: In mergeStrings, left string was found to be NULL\n");
+        return "";
+    }
+    if(rightString == NULL){
+        printf("Error: In mergeStrings, right string was found to be NULL\n");
+        return "";
+    }
 
-    memcpy(newString,leftString, strlen(rightString)); 
-    memcpy(newString + strlen(leftString),rightString, strlen(rightString)+1);
-    
+    int leftLen = strlen(leftString);
+    int rightLen = strlen(rightString);
+
+                            // Total size of left string + right string and a null termination char
+    char* newString = (char*)malloc(sizeof(char)*(leftLen+rightLen+1));
+
+    memcpy(newString,leftString,sizeof(char)*leftLen);
+    memcpy(newString + strlen(leftString),rightString, sizeof(char)*rightLen +1);
     newString[strlen(newString)+1] = '\0';
 
-    printf("New string %s\n",newString);
-
     return newString;
-
 }
