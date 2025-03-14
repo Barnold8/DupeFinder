@@ -12,8 +12,6 @@
 
 int validPath(char* path){
 
-    int pathLen = strlen(path);
-
     char* os_depend;
 
     #ifdef _WIN32
