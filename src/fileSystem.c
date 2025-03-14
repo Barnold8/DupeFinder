@@ -133,7 +133,6 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
     return files;
 }
 
-
 void handleDupes(filePtrArray* files){ 
 
     filePtrArray dupes = findDuplicates(files);
@@ -157,6 +156,8 @@ void handleDupes(filePtrArray* files){
 
             if(parsedInput.count >= 1 &&parsedInput.items[0] <= -1){
                 
+                char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
+
                 switch(parsedInput.items[0]){
 
                     case -1:
@@ -166,36 +167,30 @@ void handleDupes(filePtrArray* files){
 
                             int pathLen = strlen(dupes.items[i].filePath);
 
-                            #ifdef _WIN32
+                            #ifdef _WIN32 // attempted to merge strings but failed lol
                             
-                                char* del = "del \"";
-                                int delLen = strlen(del);
-                                
-                                memcpy(string, del, delLen); 
-                                memcpy(string + delLen, dupes.items[i].filePath, pathLen+1); 
+                                char* del = mergeStrings("del \"",pathAmmended);
 
-                                fixPath(string);
+                                if(pathAmmended != NULL){
+                                    free(pathAmmended);
+                                    pathAmmended = NULL;
+                                }
 
-                                string[strlen(string)] = '"';
-                                string[strlen(string)+1] = '\0';
+                                fixPath(del);
 
-                                system(string);
+                                system(del);
 
-
+                                free(del);
+                            
                             #elif __linux__
-    
-                                char* rm = "rm \"";
-                                int rmLen = strlen(rm);
                                 
-                                memcpy(string, rm, rmLen); 
-                                memcpy(string + rmLen, dupes.items[i].filePath, pathLen+1); 
+                                char* rm = mergeStrings("rm \"",pathAmmended);
+                      
+                                fixPath(rm);
 
-                                fixPath(string);
+                                system(rm);
 
-                                string[strlen(string)] = '"';
-                                string[strlen(string)+1] = '\0';
-
-                                system(string);
+                                free(rm);
 
                             #endif
                         }
