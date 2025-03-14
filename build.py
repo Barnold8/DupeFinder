@@ -3,7 +3,6 @@ import os
 import platform
 import sys
 
-
 binary_name = "main"
 
 binary = f" -o build/{binary_name}.exe" if platform.system().lower() == "windows" else f" -o build/{binary_name}"
