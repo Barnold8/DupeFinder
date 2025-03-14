@@ -12,71 +12,40 @@
 
 int validPath(char* path){
 
-    char* string = (char*) malloc((1024)*sizeof(char)); // personally, might be overkill
-
     int pathLen = strlen(path);
 
-    if (string == NULL){
-        free(string);
-        string = NULL;
-        return 0;
-    }
+    char* os_depend;
 
-    #ifdef _WIN32 // my version stops me needing windows.h at this moment in time so thats how im doing it 
-
-        char* dir = "dir ";
-        int dirLen = strlen(dir);
-        
-        //+1 for \0
-        memcpy(string, dir, dirLen); 
-        memcpy(string + dirLen,path,pathLen+1);
-
-        int returnValue = system(string);
-        system("cls"); // just to clean up really
-
-        if(string != NULL){
-            free(string);
-            string = NULL;
-        }
+    #ifdef _WIN32
     
-        return (returnValue != 0) ? 0 : 1; // stupid
+        os_depend = mergeStrings("dir \"",path);
 
     #elif __linux__ 
-
-        char* ls = "ls ";
-        int lsLen = strlen(ls);
         
-        //+1 for \0
-        memcpy(string, ls, lsLen); 
-        memcpy(string + lsLen,path,pathLen+1);
+        os_depend = mergeStrings("ls \"",path); 
 
-        int returnValue = system(string);
-        system("clear"); // just to clean up really
-
-        if(string != NULL){
-            free(string);
-            string = NULL;
-        }
-    
-        return (returnValue != 0) ? 0 : 1; // stupid
-    
-    #else
-
-        printf("Warning! You are attempting to run this code ona system that does not support it. This program is intended for Windows and Linux systems\n");
-        if(string != NULL){
-            free(string);
-            string = NULL;
-        }
-
-        return 0;
     #endif
 
-    if(string != NULL){
-        free(string);
-        string = NULL;
+    fixPath(os_depend);
+
+    int returnValue = system(os_depend);
+
+    #ifdef _WIN32
+    
+        system("cls"); // just to clean up really
+
+    #elif __linux__ 
+        
+        system("clear"); // just to clean up really 
+
+    #endif
+ 
+    if(os_depend != NULL){
+        free(os_depend);
+        os_depend = NULL;
     }
 
-    return 0;
+    return (returnValue != 0) ? 0 : 1; // stupid
 }
 
 filePtrArray getFiles(char* path, unsigned int buffer_size) {
@@ -155,8 +124,6 @@ void handleDupes(filePtrArray* files){
         if(parsedInput.count != -1){
 
             if(parsedInput.count >= 1 &&parsedInput.items[0] <= -1){
-                
-                char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
 
                 switch(parsedInput.items[0]){
 
@@ -165,6 +132,7 @@ void handleDupes(filePtrArray* files){
 
                         for(int i = 0; i < dupes.count; i++){
 
+                            char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
                             int pathLen = strlen(dupes.items[i].filePath);
 
                             #ifdef _WIN32 // attempted to merge strings but failed lol
@@ -183,7 +151,7 @@ void handleDupes(filePtrArray* files){
                                 free(del);
                             
                             #elif __linux__
-                                
+                              
                                 char* rm = mergeStrings("rm \"",pathAmmended);
                       
                                 fixPath(rm);
