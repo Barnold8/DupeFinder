@@ -109,3 +109,20 @@ void fixPath(char* path) {
         pointer++;
     }
 } 
+
+
+char* mergeStrings(char* leftString, char* rightString){
+
+                                                  // Total size of left string + right string and a null termination char
+    char* newString = (char*)malloc(sizeof(char)*(strlen(leftString)+strlen(rightString)+1));
+
+    memcpy(newString,leftString, strlen(rightString)); 
+    memcpy(newString + strlen(leftString),rightString, strlen(rightString)+1);
+    
+    newString[strlen(newString)+1] = '\0';
+
+    printf("New string %s\n",newString);
+
+    return newString;
+
+}

@@ -13,4 +13,6 @@ intArray parseInput();
 
 void fixPath(char* path);
 
+char* mergeStrings(char* leftString, char* rightString);
+
 #endif
