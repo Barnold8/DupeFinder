@@ -78,3 +78,4 @@ os.system(build)
 | -d  | To specify a directory path | DupeFinder.exe -d D:\foo\Bar |
 | -s | To specify the how much of a file is read (in bytes) per read | DupeFinder.exe -s 1064 |
 
+> **Note:** Flags can be combined like: DupeFinder.exe -d D:\foo\Bar -s 1064
