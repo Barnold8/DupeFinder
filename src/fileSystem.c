@@ -127,7 +127,7 @@ void handleDupes(filePtrArray* files){
 
                     case -1:
                         // remove all files
-
+                      
                         for(int i = 0; i < dupes.count; i++){
 
                             char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
@@ -145,17 +145,29 @@ void handleDupes(filePtrArray* files){
 
                                 system(del);
 
-                                free(del);
+                                
+                                if(del != NULL){
+                                    free(del);
+                                    del = NULL;
+                                }
                             
                             #elif __linux__
                               
                                 char* rm = mergeStrings("rm \"",pathAmmended);
                       
+                                if(pathAmmended != NULL){
+                                    free(pathAmmended);
+                                    pathAmmended = NULL;
+                                }
+
                                 fixPath(rm);
 
                                 system(rm);
 
-                                free(rm);
+                                if(rm != NULL){
+                                    free(rm);
+                                    rm = NULL;
+                                }
 
                             #endif
                         }
@@ -163,6 +175,61 @@ void handleDupes(filePtrArray* files){
                         break;
 
                     case -2:
+
+                        if(parsedInput.count >= 3){
+                            int n = parsedInput.items[1];
+                            int m = parsedInput.items[2];
+
+                            if(n <= m && n >= 0 && m <= dupes.count -1){
+                                for(int i = n; i <= m; i++){
+                                    char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
+                                    
+                                    #ifdef _WIN32
+                                        char* del = mergeStrings("del \"",pathAmmended);
+                                        
+                                        if(pathAmmended != NULL){
+                                            free(pathAmmended);
+                                            pathAmmended = NULL;
+                                        }
+
+                                        fixPath(del);
+
+                                        system(del);
+
+                                        if(del != NULL){
+                                            free(del);
+                                            del = NULL;
+                                        }
+
+                                    #elif __linux__
+
+                                        char* rm = mergeStrings("rm \"",pathAmmended);
+                                            
+                                        if(pathAmmended != NULL){
+                                            free(pathAmmended);
+                                            pathAmmended = NULL;
+                                        }
+
+                                        fixPath(rm);
+
+                                        system(rm);
+
+                                        if(rm != NULL){
+                                            free(rm);
+                                            rm = NULL;
+                                        }
+
+                                    #endif
+
+                                }
+
+                            }else{
+                                printf("Error: Possible errors when giving range of files to delete:\n\n\t\tn is more than m for the range of files n(%d) m(%d)\n\n\t\tn or m are negative valuesn(%d) m(%d)\n\n\t\tthe range given exceeds the amount of files found. RANGE[%d-%d], files found = %lld\n\n\n",n,m,n,m,n,m,dupes.count);
+                                return;
+                            }
+
+                        }
+                        else printf("Error: Not enough arguments found for the range specifier\n");
                         return;
 
                     default:
