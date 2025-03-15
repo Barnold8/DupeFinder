@@ -8,9 +8,6 @@ void flushInputBuffer(){
     while(getchar() != '\n');
 }
 
-//TODO: Error checking when a flag is called but no data is present. Example
-//
-//main.exe -s 1064 -d
 
 argsResult handleArgs(int argc, char *argv[]){
 
@@ -36,17 +33,17 @@ argsResult handleArgs(int argc, char *argv[]){
                     char* numberString;
                     int num;
 
-                    if (i >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
+                    if (i+1 >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
                         // FAILURE
    
-                        printf("PLACEHOLDER FAILURE\n");
+                        printf("User-Error: A number was expected for the -s flag but no number was provided for this flag\n");
                         return args;
                     } 
                     numberString = argv[i+1];
 
                     if(!(numberString && stringIsNum(numberString))){
                         // FAILURE
-                        printf("PLACEHOLDER FAILURE\n");
+                        printf("Program-Error: Cannot process non number input for bytesize of file reader\n");
                         return args;
                     }
                     num = atoi(numberString);
@@ -56,17 +53,16 @@ argsResult handleArgs(int argc, char *argv[]){
                 
                 case 'd':
                     
-                    if (i >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
+                    if (i+1 >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
                         // FAILURE
      
-                        printf("PLACEHOLDER FAILURE\n");
+                        printf("User-Error: A path was expected for the -d flag, however, none was given\n");
                         return args;
-                    } 
+                    }
                     args.folderPath = argv[i+1];
                     break;
                 
                 case 'h':
-                    printf("Flag check succeeded (h)\n");
                     printf("This program works by finding duplicate files and deleting the duplicates for you. Here are the flags and usages for them\n\n");
                     printf("-d This flag requires the path of where you want to search for duplicates | [-d C:/users/user/desktop]\n\n");
                     printf("-s This flag requires a number, this number determines the block size of the file stream buffer, if you have ram to use, make this number bigger, itll reduce I/O usage and thus be somewhat quicker.\n\tThis is in bytes however so you will need to know how many bytes you want to use at a time | [-s 1064]\n\n");
@@ -93,7 +89,7 @@ int validArgs(argsResult * args){
     char decision;
 
     if(args->bufSize <= 0){
-        printf("Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
+        printf("User-Error: cannot set buffer size to %d.\nREASON: Too small\n",args->bufSize);    
         return 0;
     }
 
@@ -110,7 +106,7 @@ int validArgs(argsResult * args){
 
     if (args->folderPath == NULL || strlen(args->folderPath) <= 0) {
         // Check if folderPath is NULL before using strlen
-        printf("Error: The folder path is invalid or not provided.\n");
+        printf("User-Error: The folder path is invalid or not provided.\n");
         return -1;
     }
 

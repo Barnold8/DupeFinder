@@ -11,7 +11,7 @@ unsigned long fileHash(FILE* fptr, unsigned int buffer_size){
     int iteration_count = 0;
 
     if (!buffer) {
-        printf("Memory allocation failed!\n");
+        printf("Program-Error: Memory allocation failed!\n");
         return 1;
     }
 

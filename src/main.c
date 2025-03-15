@@ -24,8 +24,8 @@ int main(int argc, char *argv[]){
     argsResult arguments = {0};
     arguments = handleArgs(argc,argv);
    
-    if(!(validArgs(&arguments))){
-        printf("Invalid args\n");
+    if(validArgs(&arguments) == -1){
+        printf("FATAL ERROR: Invalid args\n");
         return 1;
     }
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
     }
 
     else {
-        printf("%s is a not valid path!\n",arguments.folderPath);
+        printf("FATAL ERROR: %s is a not valid path!\n",arguments.folderPath);
         return 1;
     }
 

@@ -28,7 +28,7 @@ strArray stringSplit(char* string, const char* delim) {
     char* token = strtok(string, delim); 
 
     if(token == NULL){
-        printf("Error: initial token in split string function returns NULL (an empty string was passed into the stringSplit function or some other undefined error occurred)\n");
+        printf("Program-Error: initial token in split string function returns NULL (an empty string was passed into the stringSplit function or some other undefined error occurred)\n");
         return splitStrings;
     }
 
@@ -52,7 +52,7 @@ intArray strArrToIntArr(strArray* strArray){ // error in here with negative numb
 
         }else{
             
-            printf("PLACEHOLDER ERROR\n");
+            printf("Program-Error: Trying to convert %s to an integer but failed in strArrToIntArr\n\n",strArray->items[i]);
             ints.count = -1; // using this for an error value
             return ints;
             
@@ -83,13 +83,21 @@ intArray parseInput(){
         
         parsedInput.count = -1;
         
-        printf("Error PLACEHOLDER\n");
+        printf("Program-Error: 0 items found when splitting user input into sub strings\n");
 
         return parsedInput;
     }
 
     if(splitStrings.count != -1){
         parsedInput = strArrToIntArr(&splitStrings);
+        if(parsedInput.count == -1){
+
+            parsedInput.count = -1;
+            printf("Program-Error: Could not convert string array to integer array equivalent\n");
+            return parsedInput;
+        }
+
+
         return parsedInput;
         
     }
@@ -113,11 +121,11 @@ void fixPath(char* path) {
 char* mergeStrings(char* leftString, char* rightString){
 
     if(leftString == NULL){
-        printf("Error: In mergeStrings, left string was found to be NULL\n");
+        printf("Program-Error: In mergeStrings, left string was found to be NULL\n");
         return "";
     }
     if(rightString == NULL){
-        printf("Error: In mergeStrings, right string was found to be NULL\n");
+        printf("Program-Error: In mergeStrings, right string was found to be NULL\n");
         return "";
     }
 

@@ -96,7 +96,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
     d = opendir(path);
     if (!d) {
-        printf("Failed to open directory: %s\n", path);
+        printf("Prgram-Error: Failed to open directory: %s\n", path);
         return files;
     }
 
@@ -115,7 +115,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                     fptr = fopen(strdup(fullPath), "rb");
                     
                     if(!fptr){
-                        printf("Error reading %s\n",strdup(fullPath));
+                        printf("Program-Error: Error reading %s\n",strdup(fullPath));
                         continue;
                     }
 
@@ -131,7 +131,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                 }
 
         } else {
-            printf("Error getting info for: %s\n", fullPath);
+            printf("Program-Error: Error getting info for: %s\n", fullPath);
         }
     }
 
@@ -208,12 +208,12 @@ void handleDupes(filePtrArray* files){
                                 }
 
                             }else{
-                                printf("Error: Possible errors when giving range of files to delete:\n\n\t\tn is more than m for the range of files n(%d) m(%d)\n\n\t\tn or m are negative valuesn(%d) m(%d)\n\n\t\tthe range given exceeds the amount of files found. RANGE[%d-%d], files found = %lld\n\n\n",n,m,n,m,n,m,dupes.count);
+                                printf("User-Error: Possible errors when giving range of files to delete:\n\n\t\tn is more than m for the range of files n(%d) m(%d)\n\n\t\tn or m are negative valuesn(%d) m(%d)\n\n\t\tthe range given exceeds the amount of files found. RANGE[%d-%d], files found = %lld\n\n\n",n,m,n,m,n,m,dupes.count);
                                 return;
                             }
 
                         }
-                        else printf("Error: Not enough arguments found for the range specifier\n");
+                        else printf("User-Error: Not enough arguments found for the range specifier\n");
                         return;
 
                     default:
@@ -243,7 +243,7 @@ void handleDupes(filePtrArray* files){
 
                         #endif
                     }else{
-                        printf("Error: Cannot delete non-existing file at index %d\n",parsedInput.items[i]);
+                        printf("User-Error: Cannot delete non-existing file at index %d\n",parsedInput.items[i]);
                     }
 
 
@@ -251,7 +251,7 @@ void handleDupes(filePtrArray* files){
 
             }
         }else{
-            printf("Error: no arguments were passed into the options section\n\n");
+            printf("User-Error: no arguments were passed into the options section\n\n");
         }
 
 
