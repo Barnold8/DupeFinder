@@ -8,9 +8,6 @@
 
 // This program aims to find duplicate files by hashing the entire byte array read from a file and comparing hashes with other hashes
 
-//TODO: give functionality to delete specific files given idexes,delete all files, delete range, or just quit
-
-
 // Only compatible compilers:
     // GCC (MinGW-w64)
     // MSYS2 (GCC-based) 
