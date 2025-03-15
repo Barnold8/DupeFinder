@@ -6,7 +6,8 @@
 - [Requirements](#requirements)  
   - [Compilers](#compilers)  
   - [Build Tools](#build-tools)  
-
+    - [Custom python tool](#custom-python-tool)
+    - [Hard coded GCC](#hard-coded-GCC)
 - [Usage](#usage)  
   - [Flags](#flags)  
 
@@ -30,6 +31,7 @@ DupeFinder compiles with the following **GCC-based** compilers due to reliance o
 
 ## Build tools
 
+### Custom python tool
 I wrote my own build tool in [python](https://www.python.org/) which you can use and compiles automatically for the correct platform you are on (given the supported platforms seen in "Runs on")
 
 Its a pretty short file since it doesnt do much but it allows you to write
@@ -67,6 +69,22 @@ else:
     build = "gcc " + " src/".join(source) + binary
 
 os.system(build)
+```
+
+### hard coded GCC
+
+The only difference between windows and linux is the end of the binary name (.exe vs no extension name)
+
+> Windows
+
+```sh
+gcc args.c fileSystem.c hash.c main.c memory.c stringOps.c utils.c -o build/main.exe
+```
+
+> Linux
+
+```sh
+gcc args.c fileSystem.c hash.c main.c memory.c stringOps.c utils.c -o build/main
 ```
 
 # Usage
