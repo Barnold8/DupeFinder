@@ -15,5 +15,10 @@ int validPath(char* path);
 
 void handleDupes(filePtrArray* files);
 
+void delWindows();
+
+void delLinux();
+
+
 #endif
 

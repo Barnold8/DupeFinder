@@ -10,6 +10,46 @@
 #include "stringOps.h"
 
 
+void delWindows(char* pathAmmended){
+
+    char* del = mergeStrings("del \"",pathAmmended);
+
+    if(pathAmmended != NULL){
+        free(pathAmmended);
+        pathAmmended = NULL;
+    }
+
+    fixPath(del);
+
+    system(del);
+
+    if(del != NULL){
+        free(del);
+        del = NULL;
+    }
+
+}
+
+void delLinux(char* pathAmmended){
+
+    char* rm = mergeStrings("rm \"",pathAmmended);
+                      
+    if(pathAmmended != NULL){
+        free(pathAmmended);
+        pathAmmended = NULL;
+    }
+
+    fixPath(rm);
+
+    system(rm);
+
+    if(rm != NULL){
+        free(rm);
+        rm = NULL;
+    }
+
+}
+
 int validPath(char* path){
 
     char* os_depend;
@@ -121,7 +161,7 @@ void handleDupes(filePtrArray* files){
 
         if(parsedInput.count != -1){
 
-            if(parsedInput.count >= 1 &&parsedInput.items[0] <= -1){
+            if(parsedInput.count >= 1 && parsedInput.items[0] <= -1){
 
                 switch(parsedInput.items[0]){
 
@@ -133,41 +173,12 @@ void handleDupes(filePtrArray* files){
                             char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
                         
                             #ifdef _WIN32 // attempted to merge strings but failed lol
-                            
-                                char* del = mergeStrings("del \"",pathAmmended);
 
-                                if(pathAmmended != NULL){
-                                    free(pathAmmended);
-                                    pathAmmended = NULL;
-                                }
-
-                                fixPath(del);
-
-                                system(del);
-
-                                
-                                if(del != NULL){
-                                    free(del);
-                                    del = NULL;
-                                }
+                                delWindows(pathAmmended);
                             
                             #elif __linux__
                               
-                                char* rm = mergeStrings("rm \"",pathAmmended);
-                      
-                                if(pathAmmended != NULL){
-                                    free(pathAmmended);
-                                    pathAmmended = NULL;
-                                }
-
-                                fixPath(rm);
-
-                                system(rm);
-
-                                if(rm != NULL){
-                                    free(rm);
-                                    rm = NULL;
-                                }
+                                delLinux(pathAmmended);
 
                             #endif
                         }
@@ -185,39 +196,12 @@ void handleDupes(filePtrArray* files){
                                     char* pathAmmended = mergeStrings(dupes.items[i].filePath,"\"");
                                     
                                     #ifdef _WIN32
-                                        char* del = mergeStrings("del \"",pathAmmended);
-                                        
-                                        if(pathAmmended != NULL){
-                                            free(pathAmmended);
-                                            pathAmmended = NULL;
-                                        }
-
-                                        fixPath(del);
-
-                                        system(del);
-
-                                        if(del != NULL){
-                                            free(del);
-                                            del = NULL;
-                                        }
+                                    
+                                        delWindows(pathAmmended);
 
                                     #elif __linux__
 
-                                        char* rm = mergeStrings("rm \"",pathAmmended);
-                                            
-                                        if(pathAmmended != NULL){
-                                            free(pathAmmended);
-                                            pathAmmended = NULL;
-                                        }
-
-                                        fixPath(rm);
-
-                                        system(rm);
-
-                                        if(rm != NULL){
-                                            free(rm);
-                                            rm = NULL;
-                                        }
+                                        delLinux(pathAmmended);
 
                                     #endif
 
@@ -238,10 +222,36 @@ void handleDupes(filePtrArray* files){
 
 
             }
+            else{
 
+                for(int i = 0; i < parsedInput.count; i++){
+
+                    if(parsedInput.items[i] >= 0 && parsedInput.items[i] <= dupes.count){
+
+                        printf("Removing index %d\n",parsedInput.items[i]);
+
+                        char* pathAmmended = mergeStrings(dupes.items[parsedInput.items[i]].filePath,"\"");
+
+                        #ifdef _WIN32
+                        
+                            delWindows(pathAmmended);
+                        
+    
+                        #elif __linux__
+    
+                            delLinux(pathAmmended);
+
+                        #endif
+                    }else{
+                        printf("Error: Cannot delete non-existing file at index %d\n",parsedInput.items[i]);
+                    }
+
+
+                }
+
+            }
         }else{
-
-
+            printf("Error: no arguments were passed into the options section\n\n");
         }
 
 
