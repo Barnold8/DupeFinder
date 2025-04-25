@@ -18,6 +18,8 @@
 
 int main(int argc, char *argv[]){
 
+    long float divident = 1000000;
+
     argsResult arguments = {0};
     arguments = handleArgs(argc,argv);
    
@@ -29,6 +31,12 @@ int main(int argc, char *argv[]){
     if(validPath(arguments.folderPath)){   
         filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize);
     
+        for(int i = 0; i < files.count; i++){
+
+            printf("Name %s | Size %ld\n megabytes",files.items[i].fileName,files.items[i].fileSize / divident);
+
+        }
+
         if(files.count >=1) handleDupes(&files);
         else printf("===================No files found===================\n\n");
     }

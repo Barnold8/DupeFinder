@@ -110,6 +110,5 @@ int validArgs(argsResult * args){
         return -1;
     }
 
-    printf("Success valid args\n");
     return 1;
 }

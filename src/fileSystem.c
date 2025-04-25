@@ -119,10 +119,17 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                         continue;
                     }
 
+                    fseek(fptr, 0L, SEEK_END); 
+                      
+                    long int res = ftell(fptr); 
+
+                    fseek(fptr, 0, SEEK_SET);
+
                     hashedFile _file = {
                         .filePath = strdup(fullPath),
                         .fileName = strdup(dir->d_name),
-                        .fileHash = fileHash(fptr,buffer_size)
+                        .fileHash = fileHash(fptr,buffer_size),
+                        .fileSize = res
                     };
                     
                     addFilePtrElements(&files,_file);

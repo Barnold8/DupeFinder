@@ -6,6 +6,7 @@ typedef struct dynamic_fileptr_array filePtrArray;
 typedef struct hashedFile {
     char* filePath;
     char* fileName;
+    long int fileSize;
     unsigned long fileHash;
 } hashedFile;
 
