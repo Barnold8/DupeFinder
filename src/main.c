@@ -21,6 +21,7 @@
 int main(int argc, char *argv[]){
 
     clock_t begin = clock();
+    double time_spent;
 
     int divident = 1000000;
 
@@ -33,19 +34,22 @@ int main(int argc, char *argv[]){
     }
 
     if(validPath(arguments.folderPath)){   
-        filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize);
+
+        filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize,0);
+
+        clock_t end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     
-        // if(files.count >=1) handleDupes(&files);
-        // else printf("===================No files found===================\n\n");
+        printf("FILES COUNT %d\n",files.count);
+        if(files.count >=1) handleDupes(&files);
+        else printf("===================No files found===================\n\n");
+
     }
 
     else {
         printf("FATAL ERROR: %s is a not valid path!\n",arguments.folderPath);
         return 1;
     }
-
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
     printf("Executed in %f seconds\n",time_spent);
 

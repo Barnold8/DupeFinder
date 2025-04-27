@@ -86,7 +86,7 @@ int validPath(char* path){
     return (returnValue != 0) ? 0 : 1; // stupid
 }
 
-filePtrArray getFiles(char* path, unsigned int buffer_size) {
+filePtrArray getFiles(char* path, unsigned int buffer_size, int sizeOptimisation) {
 
     DIR *d;
     struct dirent *dir;
@@ -95,6 +95,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
     filePtrArray files = {0};
 
     d = opendir(path);
+
     if (!d) {
         printf("Program-Error: Failed to open directory: %s\n", path);
         return files;
@@ -105,7 +106,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
         snprintf(fullPath, sizeof(fullPath), "%s/%s", path, dir->d_name);
 
-        printf("Grabbing file [%s]\n\n",fullPath);
+        // printf("Grabbing file [%s]\n\n",fullPath);
 
         if (stat(fullPath, &fileStat) == 0) {
                 if (S_ISREG(fileStat.st_mode)) {
@@ -128,7 +129,6 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                     hashedFile _file = {
                         .filePath = strdup(fullPath),
                         .fileName = strdup(dir->d_name),
-                        // .fileHash = fileHash(fptr,buffer_size),
                         .fileSize = res
                     };
                     
@@ -142,10 +142,31 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
         }
     }
 
-    sortFilesBySize(files.items,files.count);
+    if(sizeOptimisation >=1){
 
-    for(int i = 0; i < files.count; i++){
-        printf("Size %d \n",files.items[i].fileSize);
+        sortFilesBySize(files.items,files.count);
+
+        filePtrArray sizeOptimisedFiles = {0};
+        long currentSize = files.items[0].fileSize;
+    
+        for(int i = 0; i < files.count; i++){
+            if (files.items[i].fileSize != currentSize){
+                currentSize = files.items[i].fileSize;
+            }else{
+                FILE* fptr;
+                fptr = fopen(strdup(files.items[i].fileName), "rb");
+                
+                files.items[i].fileHash = fileHash(fptr,buffer_size);
+                addFilePtrElements(&sizeOptimisedFiles,files.items[i]);
+    
+                fclose(fptr);
+            }
+        }
+
+        free(files.items);
+        closedir(d);
+
+        return sizeOptimisedFiles;
     }
 
     closedir(d);
