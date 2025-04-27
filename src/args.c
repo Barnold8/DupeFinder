@@ -11,7 +11,7 @@ void flushInputBuffer(){
 
 argsResult handleArgs(int argc, char *argv[]){
 
-    char* usageString = "USAGE dff.exe [-d C:/users/user/desktop] [-s 1064]";
+    char* usageString = "USAGE DupeFinder.exe [-d C:/users/user/desktop] [-s 1064] [-c 1]";
     argsResult args = {0,0,""};
 
     if (argc <=1){
@@ -89,7 +89,9 @@ argsResult handleArgs(int argc, char *argv[]){
                     printf("This program works by finding duplicate files and deleting the duplicates for you. Here are the flags and usages for them\n\n");
                     printf("-d This flag requires the path of where you want to search for duplicates | [-d C:/users/user/desktop]\n\n");
                     printf("-s This flag requires a number, this number determines the block size of the file stream buffer, if you have ram to use, make this number bigger, itll reduce I/O usage and thus be somewhat quicker.\n\tThis is in bytes however so you will need to know how many bytes you want to use at a time | [-s 1064]\n\n");
+                    printf("-c This determines the optimisation mode\n\n");
                     printf("-h This flag prints this lovely help information\n\n");
+                    
 
                 break;
 

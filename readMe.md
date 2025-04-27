@@ -95,5 +95,6 @@ gcc args.c fileSystem.c hash.c main.c memory.c stringOps.c utils.c -o build/main
 | -------- | ------- |----- |
 | -d  | To specify a directory path | DupeFinder.exe -d D:\foo\Bar |
 | -s | To specify the how much of a file is read (in bytes) per read | DupeFinder.exe -s 1064 |
+| -c | To specify optimisation mode. Currently {0: default, 1: size optimisation} | DupeFinder.exe -c 1 |
 
 > **Note:** Flags can be combined like: DupeFinder.exe -d D:\foo\Bar -s 1064
