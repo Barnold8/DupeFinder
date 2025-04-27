@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "args.h"           // for parsing cli args
 #include "fileSystem.h"
 #include "memory.h"
 #include "stringOps.h"
+
 
 // This program aims to find duplicate files by hashing the entire byte array read from a file and comparing hashes with other hashes
 
@@ -18,7 +20,9 @@
 
 int main(int argc, char *argv[]){
 
-    long float divident = 1000000;
+    clock_t begin = clock();
+
+    int divident = 1000000;
 
     argsResult arguments = {0};
     arguments = handleArgs(argc,argv);
@@ -31,20 +35,19 @@ int main(int argc, char *argv[]){
     if(validPath(arguments.folderPath)){   
         filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize);
     
-        for(int i = 0; i < files.count; i++){
-
-            printf("Name %s | Size %ld\n megabytes",files.items[i].fileName,files.items[i].fileSize / divident);
-
-        }
-
-        if(files.count >=1) handleDupes(&files);
-        else printf("===================No files found===================\n\n");
+        // if(files.count >=1) handleDupes(&files);
+        // else printf("===================No files found===================\n\n");
     }
 
     else {
         printf("FATAL ERROR: %s is a not valid path!\n",arguments.folderPath);
         return 1;
     }
+
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+    printf("Executed in %f seconds\n",time_spent);
 
     return 0;
 }

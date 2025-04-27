@@ -96,7 +96,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
 
     d = opendir(path);
     if (!d) {
-        printf("Prgram-Error: Failed to open directory: %s\n", path);
+        printf("Program-Error: Failed to open directory: %s\n", path);
         return files;
     }
 
@@ -128,7 +128,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
                     hashedFile _file = {
                         .filePath = strdup(fullPath),
                         .fileName = strdup(dir->d_name),
-                        .fileHash = fileHash(fptr,buffer_size),
+                        // .fileHash = fileHash(fptr,buffer_size),
                         .fileSize = res
                     };
                     
@@ -140,6 +140,12 @@ filePtrArray getFiles(char* path, unsigned int buffer_size) {
         } else {
             printf("Program-Error: Error getting info for: %s\n", fullPath);
         }
+    }
+
+    sortFilesBySize(files.items,files.count);
+
+    for(int i = 0; i < files.count; i++){
+        printf("Size %d \n",files.items[i].fileSize);
     }
 
     closedir(d);

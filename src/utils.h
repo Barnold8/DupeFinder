@@ -4,8 +4,10 @@
 #include "memory.h"
 
 
-int compare(const void* a, const void* b);
-void sortFiles(hashedFile* files, size_t count);
+int compareHash(const void* a, const void* b);
+int compareSize(const void* a, const void* b);
+void sortFilesByHash(hashedFile* files, size_t count);
+void sortFilesBySize(hashedFile* files, size_t count);
 filePtrArray findDuplicates(filePtrArray* arr);
 
 #endif
