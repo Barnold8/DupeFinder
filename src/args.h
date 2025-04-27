@@ -4,6 +4,7 @@
 typedef struct argsResult{
 
     unsigned int bufSize;
+    unsigned int optimiseSize;
     char* folderPath;
 
 }argsResult;

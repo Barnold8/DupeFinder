@@ -12,7 +12,7 @@ void flushInputBuffer(){
 argsResult handleArgs(int argc, char *argv[]){
 
     char* usageString = "USAGE dff.exe [-d C:/users/user/desktop] [-s 1064]";
-    argsResult args = {0,""};
+    argsResult args = {0,0,""};
 
     if (argc <=1){
 
@@ -61,7 +61,30 @@ argsResult handleArgs(int argc, char *argv[]){
                     }
                     args.folderPath = argv[i+1];
                     break;
-                
+
+                case 'c':
+                    
+                    char* optmisationString;
+                    int optimiseNum;
+
+                    if (i+1 >= argc){// check if there is data in i+1 by seeing if the length of args is at least 1 more than i
+                        // FAILURE
+
+                        printf("User-Error: A number was expected for the -c flag but no number was provided for this flag\n");
+                        return args;
+                    } 
+                    optmisationString = argv[i+1];
+
+                    if(!(optmisationString && stringIsNum(optmisationString))){
+                        // FAILURE
+                        printf("Program-Error: Cannot process non number input for conditional of size optimisation\n");
+                        return args;
+                    }
+                    optimiseNum = atoi(optmisationString);
+
+                    args.optimiseSize = optimiseNum;
+                    break;
+                    
                 case 'h':
                     printf("This program works by finding duplicate files and deleting the duplicates for you. Here are the flags and usages for them\n\n");
                     printf("-d This flag requires the path of where you want to search for duplicates | [-d C:/users/user/desktop]\n\n");

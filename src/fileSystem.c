@@ -106,13 +106,11 @@ filePtrArray getFiles(char* path, unsigned int buffer_size, int sizeOptimisation
 
         snprintf(fullPath, sizeof(fullPath), "%s/%s", path, dir->d_name);
 
-        // printf("Grabbing file [%s]\n\n",fullPath);
-
         if (stat(fullPath, &fileStat) == 0) {
                 if (S_ISREG(fileStat.st_mode)) {
 
                     FILE* fptr;
-
+                    
                     fptr = fopen(strdup(fullPath), "rb");
                     
                     if(!fptr){
@@ -126,13 +124,22 @@ filePtrArray getFiles(char* path, unsigned int buffer_size, int sizeOptimisation
 
                     fseek(fptr, 0, SEEK_SET);
 
-                    hashedFile _file = {
-                        .filePath = strdup(fullPath),
-                        .fileName = strdup(dir->d_name),
-                        .fileSize = res
-                    };
-                    
-                    addFilePtrElements(&files,_file);
+                    if(sizeOptimisation <=0){
+                        hashedFile _file = {
+                            .filePath = strdup(fullPath),
+                            .fileName = strdup(dir->d_name),
+                            .fileHash = fileHash(fptr,buffer_size),
+                            .fileSize = res
+                        };
+                        addFilePtrElements(&files,_file);
+                    }else{
+                        hashedFile _file = {
+                            .filePath = strdup(fullPath),
+                            .fileName = strdup(dir->d_name),
+                            .fileSize = res
+                        };
+                        addFilePtrElements(&files,_file);
+                    }
 
                     fclose(fptr);
                 }
@@ -143,7 +150,7 @@ filePtrArray getFiles(char* path, unsigned int buffer_size, int sizeOptimisation
     }
 
     if(sizeOptimisation >=1){
-
+        
         sortFilesBySize(files.items,files.count);
 
         filePtrArray sizeOptimisedFiles = {0};

@@ -20,11 +20,9 @@
 
 int main(int argc, char *argv[]){
 
-    clock_t begin = clock();
     double time_spent;
-
+    clock_t begin = clock();
     int divident = 1000000;
-
     argsResult arguments = {0};
     arguments = handleArgs(argc,argv);
    
@@ -35,12 +33,12 @@ int main(int argc, char *argv[]){
 
     if(validPath(arguments.folderPath)){   
 
-        filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize,0);
+        filePtrArray files = getFiles(arguments.folderPath, arguments.bufSize,arguments.optimiseSize);
 
         clock_t end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     
-        printf("FILES COUNT %d\n",files.count);
+        
         if(files.count >=1) handleDupes(&files);
         else printf("===================No files found===================\n\n");
 
@@ -52,6 +50,12 @@ int main(int argc, char *argv[]){
     }
 
     printf("Executed in %f seconds\n",time_spent);
+
+    if(arguments.optimiseSize >= 1){
+        printf("Size optimisation\n");
+    }else{
+        printf("Default optimisation\n");
+    }
 
     return 0;
 }
