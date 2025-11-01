@@ -18,7 +18,6 @@ def initArgParse():
 
     return parser.parse_args()
 
-
 def fileGuardRail(path):
 
     WARNING_STRING = "WARNING! Either no directory was chosen or you chose '.' which means the current directory you are in. Continuing to proceed could lead to undefined behaviour. Do you wish to proceed? y/n "
@@ -36,7 +35,6 @@ def fileGuardRail(path):
     currentBoolean = os.path.isdir(path)
 
     return currentBoolean
-
 
 def generateHash(fileName,BUFFER_SIZE):
     md5 = hashlib.md5() # could not find a flush method so a new object has to be created per file hashing procedure, hopefully its not slow
