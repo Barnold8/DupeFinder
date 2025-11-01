@@ -8,6 +8,8 @@
 
 ## About  
 
+IVE NOT FINISHED THE PYTHON VERSION YET
+
 ## Requirements  
 
 # Usage
