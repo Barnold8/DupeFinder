@@ -38,7 +38,8 @@ def fileGuardRail(path):
     return currentBoolean
 
 
-def generateHash(fileName,md5,BUFFER_SIZE):
+def generateHash(fileName,BUFFER_SIZE):
+    md5 = hashlib.md5() # could not find a flush method so a new object has to be created per file hashing procedure, hopefully its not slow
     # with thanks to https://stackoverflow.com/questions/22058048/hashing-a-file-in-python
     with open(fileName, 'rb') as f:
         while True:
@@ -51,12 +52,15 @@ def generateHash(fileName,md5,BUFFER_SIZE):
 
 if __name__ == "__main__":
 
-    md5 = hashlib.md5()
+
     args = initArgParse()
     fileGuardRail(args.directory)
 
     BUFFER_SIZE = args.buffersize
-    print(args)
 
 
-    print(generateHash("test.txt",md5,BUFFER_SIZE))
+    print(generateHash("test.txt",BUFFER_SIZE))
+    print(generateHash("test copy.txt",BUFFER_SIZE))
+
+
+    
