@@ -51,16 +51,7 @@ def generateHash(fileName,BUFFER_SIZE):
 
 
 if __name__ == "__main__":
-
-
     args = initArgParse()
     fileGuardRail(args.directory)
-
     BUFFER_SIZE = args.buffersize
-
-
-    print(generateHash("test.txt",BUFFER_SIZE))
-    print(generateHash("test copy.txt",BUFFER_SIZE))
-
-
     
