@@ -1,6 +1,13 @@
 import hashlib
 import sys
+import argparse
 
+
+def initArgParse():
+    parser = argparse.ArgumentParser(description='An application for finding duplicate files using the md5 hashing algorithm')
+    parser.add_argument('pos_arg', type=int,
+                    help='A required integer positional argument')
+    pass
 
 def generateHash(fileName,md5,BUFFER_SIZE):
     # with thanks to https://stackoverflow.com/questions/22058048/hashing-a-file-in-python
@@ -14,15 +21,7 @@ def generateHash(fileName,md5,BUFFER_SIZE):
 
 
 def parseArgs(args):
-
     args = args[1::]
-
-    if len(args) % 2 == 0:
-        print(args)
-    else:
-        print("ERR")
-        exit()
-
 
 if __name__ == "__main__":
 
@@ -31,8 +30,7 @@ if __name__ == "__main__":
     BUFFER_SIZE = 2**10
     md5 = hashlib.md5()
 
-
-    generateHash("test.txt",md5,BUFFER_SIZE)
+    print(generateHash("test.txt",md5,BUFFER_SIZE))
 
 
 
