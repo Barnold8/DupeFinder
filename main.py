@@ -32,7 +32,7 @@ if __name__ == "__main__":
     md5 = hashlib.md5()
 
 
-    generateHash("test.txt",md5,sha1)
+    generateHash("test.txt",md5,BUFFER_SIZE)
 
 
 
