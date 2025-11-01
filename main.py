@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     BUFFER_SIZE = 2**10
     md5 = hashlib.md5()
-    sha1 = hashlib.sha1()
+
 
     generateHash("test.txt",md5,sha1)
 
