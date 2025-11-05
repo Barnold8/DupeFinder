@@ -1,5 +1,4 @@
-test*/
+*test*
 out.txt
 .vscode
-test*
 __pycache__
