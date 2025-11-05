@@ -16,6 +16,12 @@ def initArgParse():
     parser.add_argument('-p','--pairs', default=True, action='store_false',
                     help='A boolean value to determine if like named files will be checked against each other. For example test.txt will only be checked against text.txt (1) and other similar files. This is True by default, setting this to true could impact search performance')
 
+    parser.add_argument('-r','--recursive', default=True, action='store_false',
+                    help='A boolean value to determine if child directories are searched for files to compare against. This is false by default')
+    
+    parser.add_argument('-e','--extensionless', default=True, action='store_false',
+                    help='A boolean value to determine if the program ignores file extensions for file comparison or not. This is false by default')
+
     return parser.parse_args()
 
 def fileGuardRail(path):
