@@ -16,14 +16,12 @@ def grabFilesRecursive(path):
    files = []
    print(path)
    for f in listdir(path):
-      if isfile(join(path, f)):
+      if isfile(abspath(join(path, f))):
          files.append(f)
       elif isdir(join(path, f)):
-         files.extend(grabFilesRecursive(join(path, f)))
+         files.extend(grabFilesRecursive(abspath(join(path, f))))
 
    return files
-
-
 
 def hasExtension(file):
    parts = file.split(".")
